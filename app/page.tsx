@@ -24,7 +24,7 @@ function useInView(threshold = 0.15) {
   return { ref, inView }
 }
 
-// ─── Animated counter ────────────────────────────────────────────────────────
+// ─── Animated counter ───────────────────────────────────────────────────────
 function Counter({ end, suffix = "" }: { end: number; suffix?: string }) {
   const [count, setCount] = useState(0)
   const { ref, inView } = useInView()
@@ -44,7 +44,7 @@ function Counter({ end, suffix = "" }: { end: number; suffix?: string }) {
   return <span ref={ref}>{count.toLocaleString()}{suffix}</span>
 }
 
-// ─── Bento card ──────────────────────────────────────────────────────────────
+// ─── Bento card ─────────────────────────────────────────────────────────
 function BentoCard({ children, className = "", delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
   const { ref, inView } = useInView(0.1)
   return (
@@ -66,7 +66,7 @@ function BentoCard({ children, className = "", delay = 0 }: { children: React.Re
   )
 }
 
-// ─── Pill tag ─────────────────────────────────────────────────────────────────
+// ─── Pill tag ──────────────────────────────────────────────────────────
 function Tag({ children }: { children: React.ReactNode }) {
   return (
     <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] tracking-widest font-sans text-black/40 bg-black/[0.04]">
@@ -75,7 +75,7 @@ function Tag({ children }: { children: React.ReactNode }) {
   )
 }
 
-// ─── Main page ────────────────────────────────────────────────────────────────
+// ─── Main page ─────────────────────────────────────────────────────────
 export default function ViralLookupPage() {
   const [email, setEmail] = useState("")
   const [submitted, setSubmitted] = useState(false)
@@ -107,7 +107,7 @@ export default function ViralLookupPage() {
       {/* ── STICKY NAV ────────────────────────────────────────────────────── */}
       <MobileNav />
 
-      {/* ── HERO ──────────────────────────────────────────────────────────── */}
+      {/* ── HERO ─────────────────────────────────────────────────────────── */}
       <section className="relative h-screen overflow-hidden">
 
         {/* Video background — zooms in once intro is done */}
@@ -127,11 +127,11 @@ export default function ViralLookupPage() {
 
 
         {/* Progressive blur + light gradient rising from bottom */}
-        <div className="absolute inset-x-0 bottom-0 z-10 pointer-events-none" style={{ height: "65%", background: "linear-gradient(to top, #F5F4F0 0%, #F5F4F0 18%, rgba(245,244,240,0.85) 35%, rgba(245,244,240,0.5) 55%, rgba(245,244,240,0.15) 75%, transparent 100%)" }} />
+        <div className="absolute inset-x-0 bottom-0 z-10 pointer-events-none" style={{ height: "65%", background: "linear-gradient(to top, #F5F4F0 0%, #F5F4F0 18%, rgba(245,244,240,0.85) 35%, rgba(245,244,240,0) 65%)" }} />
         {/* Backdrop blur layers — progressively lighter toward top */}
-        <div className="absolute inset-x-0 bottom-0 z-10 pointer-events-none" style={{ height: "20%", backdropFilter: "blur(12px)", WebkitBackdropFilter: "blur(12px)", maskImage: "linear-gradient(to top, black 0%, transparent 100%)", WebkitMaskImage: "linear-gradient(to top, black 0%, transparent 100%)" }} />
-        <div className="absolute inset-x-0 bottom-0 z-10 pointer-events-none" style={{ height: "38%", backdropFilter: "blur(6px)", WebkitBackdropFilter: "blur(6px)", maskImage: "linear-gradient(to top, black 0%, transparent 100%)", WebkitMaskImage: "linear-gradient(to top, black 0%, transparent 100%)" }} />
-        <div className="absolute inset-x-0 bottom-0 z-10 pointer-events-none" style={{ height: "55%", backdropFilter: "blur(2px)", WebkitBackdropFilter: "blur(2px)", maskImage: "linear-gradient(to top, black 0%, transparent 100%)", WebkitMaskImage: "linear-gradient(to top, black 0%, transparent 100%)" }} />
+        <div className="absolute inset-x-0 bottom-0 z-10 pointer-events-none" style={{ height: "20%", backdropFilter: "blur(12px)", WebkitBackdropFilter: "blur(12px)", maskImage: "linear-gradient(to bottom, transparent 0%, black 100%)", WebkitMaskImage: "linear-gradient(to bottom, transparent 0%, black 100%)" }} />
+        <div className="absolute inset-x-0 bottom-0 z-10 pointer-events-none" style={{ height: "38%", backdropFilter: "blur(6px)", WebkitBackdropFilter: "blur(6px)", maskImage: "linear-gradient(to bottom, transparent 0%, black 100%)", WebkitMaskImage: "linear-gradient(to bottom, transparent 0%, black 100%)" }} />
+        <div className="absolute inset-x-0 bottom-0 z-10 pointer-events-none" style={{ height: "55%", backdropFilter: "blur(2px)", WebkitBackdropFilter: "blur(2px)", maskImage: "linear-gradient(to bottom, transparent 0%, black 100%)", WebkitMaskImage: "linear-gradient(to bottom, transparent 0%, black 100%)" }} />
 
         {/* Spacer so hero content doesn't sit under the fixed nav */}
         <div className="h-20" />
@@ -149,15 +149,15 @@ export default function ViralLookupPage() {
               transition: "opacity 1s cubic-bezier(0.16,1,0.3,1) 0ms, filter 1s cubic-bezier(0.16,1,0.3,1) 0ms, transform 1s cubic-bezier(0.16,1,0.3,1) 0ms",
             }}
           >
-            Build &amp;<br />orchestrate AI<br />agents while<br />you sleep.
+            AI‑powered<br />content<br />creation.
           </h1>
 
           {/* 3 metrics — staggered after title */}
           <div className="flex gap-8 sm:gap-12">
             {[
-              { value: "50M+", label: "Tasks" },
-              { value: "99.9%", label: "Uptime" },
-              { value: "180+", label: "Countries" },
+              { value: "10M+", label: "Searches" },
+              { value: "500K+", label: "Creators" },
+              { value: "1B+", label: "Viral Ideas" },
             ].map((stat, i) => (
               <div
                 key={i}
@@ -181,9 +181,9 @@ export default function ViralLookupPage() {
         <div className="max-w-6xl mx-auto">
           <div className="mb-16">
             <PixelIcon type="platform" size={40} />
-            <div className="mt-4"><Tag>PLATFORM</Tag></div>
+            <div className="mt-4"><Tag>FEATURES</Tag></div>
             <RevealText className="mt-5 text-4xl md:text-5xl lg:text-6xl font-light tracking-tight leading-[1.05]">
-              {"Everything you need\nto ship agents."}
+              {"Discover trending content\nin seconds."}
             </RevealText>
           </div>
 
@@ -215,11 +215,11 @@ export default function ViralLookupPage() {
               {/* Content */}
               <div className="relative z-10">
                 <div className="w-10 h-10 rounded-xl border border-black/10 bg-white/60 flex items-center justify-center mb-6" style={{ backdropFilter: "blur(8px)" }}>
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/><path d="m4.93 4.93 2.12 2.12M16.95 16.95l2.12 2.12M4.93 19.07l2.12-2.12M16.95 7.05l2.12-2.12"/></svg>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/><path d="M4.22 4.22v0M19.78 19.78v0M4.22 19.78v0M19.78 4.22v0"/></svg>
                 </div>
-                <h3 className="text-xl font-light mb-3">Visual Agent Builder</h3>
+                <h3 className="text-xl font-light mb-3">Search Viral Content Ideas</h3>
                 <p className="text-sm text-black/45 leading-relaxed max-w-sm">
-                  Drag, connect, and configure agents through an intuitive graph editor. No boilerplate. Ship in minutes, not days.
+                  Find proven viral hooks and trending topics across platforms. Search by keywords, competitor content, or viral themes.
                 </p>
               </div>
             </BentoCard>
@@ -229,24 +229,24 @@ export default function ViralLookupPage() {
               <div className="w-10 h-10 rounded-xl border border-black/10 flex items-center justify-center mb-5">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
               </div>
-              <h3 className="text-lg font-light mb-2">Real-time Monitoring</h3>
-              <p className="text-sm text-black/45 leading-relaxed">Trace every decision. Debug with full execution history and live logs.</p>
+              <h3 className="text-lg font-light mb-2">Real-time Analytics</h3>
+              <p className="text-sm text-black/45 leading-relaxed">See engagement metrics, share counts, and viral potential for every piece of content.</p>
             </BentoCard>
 
             <BentoCard className="col-span-12 md:col-span-4 p-8 min-h-[200px]" delay={160}>
               <div className="w-10 h-10 rounded-xl border border-black/10 flex items-center justify-center mb-5">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 10h8M8 14h5"/></svg>
               </div>
-              <h3 className="text-lg font-light mb-2">Memory & Context</h3>
-              <p className="text-sm text-black/45 leading-relaxed">Persistent long-term memory across sessions. Agents learn from every interaction.</p>
+              <h3 className="text-lg font-light mb-2">Content Inspiration</h3>
+              <p className="text-sm text-black/45 leading-relaxed">Get hooks, angles, and ideas from millions of viral posts and trending content.</p>
             </BentoCard>
 
             <BentoCard className="col-span-12 md:col-span-4 p-8 min-h-[200px]" delay={200}>
               <div className="w-10 h-10 rounded-xl border border-black/10 flex items-center justify-center mb-5">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
               </div>
-              <h3 className="text-lg font-light mb-2">Guardrails & Permissions</h3>
-              <p className="text-sm text-black/45 leading-relaxed">Define what agents can and cannot do. Fine-grained access control per tool.</p>
+              <h3 className="text-lg font-light mb-2">Multi-Platform Search</h3>
+              <p className="text-sm text-black/45 leading-relaxed">Search across TikTok, Instagram, YouTube, and more from one unified dashboard.</p>
             </BentoCard>
           </div>
         </div>
@@ -258,13 +258,13 @@ export default function ViralLookupPage() {
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-16">
             <div>
               <PixelIcon type="agents" size={40} />
-              <div className="mt-4"><Tag>AGENT TYPES</Tag></div>
+              <div className="mt-4"><Tag>SEARCH TYPES</Tag></div>
               <RevealText className="mt-5 text-4xl md:text-5xl font-light tracking-tight leading-[1.05]">
-                {"Plug-and-play agents\nready to deploy."}
+                {"Multiple ways to find\nviral content."}
               </RevealText>
             </div>
             <p className="text-sm text-black/45 leading-relaxed max-w-xs">
-              Start with a pre-built agent or compose your own from primitives. Every agent is versioned, testable, and observable.
+              From keyword search to competitor analysis, find exactly what you need to create viral content.
             </p>
           </div>
 
@@ -279,16 +279,16 @@ export default function ViralLookupPage() {
             <PixelIcon type="workflow" size={40} />
             <div className="mt-4"><Tag>WORKFLOW</Tag></div>
             <RevealText className="mt-5 text-4xl md:text-5xl font-light tracking-tight leading-[1.05]">
-              {"From idea to running agent\nin four steps."}
+              {"From search to creation\nin four steps."}
             </RevealText>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-4 gap-3" onMouseMove={handleMouse}>
             {[
-              { n: "01", title: "Think",  desc: "Describe your video content in plain language. Set objectives, tools, and boundaries.", delay: 0,   img: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/define-5aafAmGBrxZpOqJ3XLHY3n3qzC2I5K.png" },
-              { n: "02", title: "Generate", desc: "Chain agents together in the visual editor. Wire triggers, conditions, and outputs.", delay: 80,  img: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/compose-5RT5VR4f1Y3GoFmovqTKLTG4UXp3g2.png" },
-              { n: "03", title: "Test",    desc: "Run  simulations. Inspect every decision in the execution trace.", delay: 140, img: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/test-zm8guZwxJHtwWsJ7XO4B0CF7GzlNK8.png" },
-              { n: "04", title: "Produce",  desc: "Produce High Qulaity Cotents", delay: 200, img: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/deploy-an8fgHSLzniojkcmRyGGIFQUJF9T5J.png" },
+              { n: "01", title: "Search",  desc: "Find trending content using keywords, hashtags, or competitor analysis.", delay: 0,   img: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/think-image-placeholder.png" },
+              { n: "02", title: "Analyze", desc: "Review engagement metrics, hooks, and viral strategies from top creators.", delay: 80,  img: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/generate-image-placeholder.png" },
+              { n: "03", title: "Ideate",    desc: "Brainstorm content ideas based on trending patterns and viral hooks.", delay: 140, img: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/test-image-placeholder.png" },
+              { n: "04", title: "Create",  desc: "Generate and publish your own viral-ready content in minutes.", delay: 200, img: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/deploy-image-placeholder.png" },
             ].map((step) => (
               <BentoCard key={step.n} className="relative overflow-hidden flex flex-col min-h-[320px]" delay={step.delay}>
                 {/* Image at top — mask fades it out strongly before the bottom edge */}
@@ -324,13 +324,13 @@ export default function ViralLookupPage() {
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-16">
             <div>
               <PixelIcon type="integrations" size={40} />
-              <div className="mt-4"><Tag>INTEGRATIONS</Tag></div>
+              <div className="mt-4"><Tag>PLATFORMS</Tag></div>
               <RevealText className="mt-5 text-4xl md:text-5xl font-light tracking-tight leading-[1.05]">
-                {"Connect any tool.\nControl any system."}
+                {"Search every major\nplatform."}
               </RevealText>
             </div>
             <p className="text-sm text-black/45 leading-relaxed max-w-xs">
-              200+ native connectors. Everything from Slack to your internal database. Build custom tools with our SDK in minutes.
+              Find viral content from TikTok, Instagram, YouTube, Twitter, and more in one unified interface.
             </p>
           </div>
 
@@ -341,7 +341,7 @@ export default function ViralLookupPage() {
             <div className="relative w-full h-[280px] md:h-[480px] shrink-0">
               <img
                 src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Org%20Arc%20-%20Upscaled-Sk90jShfu7nltLnhoQbaMJC1YaQKuU.png"
-                alt="Agent orchestration architecture"
+                alt="Multi-platform integration"
                 className="absolute inset-0 w-full h-full object-cover object-center"
               />
             </div>
@@ -356,15 +356,14 @@ export default function ViralLookupPage() {
                   background: "rgba(255,255,255,0.60)",
                 }}
               >
-                <Tag>SDK</Tag>
-                <h3 className="mt-3 text-lg font-light mb-2">Build custom tools</h3>
-                <p className="text-xs text-black/45 leading-relaxed mb-4">Define any function as a tool your agents can call. TypeScript and Python.</p>
+                <Tag>TRENDING NOW</Tag>
+                <h3 className="mt-3 text-lg font-light mb-2">Discover trending hooks</h3>
+                <p className="text-xs text-black/45 leading-relaxed mb-4">See what's trending right now across all platforms and your favorite niches.</p>
                 <div className="bg-black/[0.05] rounded-lg border border-black/[0.07] p-3 font-mono text-[11px] text-black/50 leading-relaxed">
-                  <span className="text-black/25">// tool definition</span><br />
-                  <span className="text-blue-600/70">defineTool</span>{"({"}<br />
-                  {"  "}<span className="text-amber-700/70">name</span>: <span className="text-green-700/70">&apos;fetchPrice&apos;</span>,<br />
-                  {"  "}<span className="text-amber-700/70">run</span>: <span className="text-black/35">async (q) </span>={">"}<br />
-                  {"    "}<span className="text-blue-600/70">api</span>.get(q)<br />
+                  <span className="text-black/25">// trending searches</span><br />
+                  <span className="text-blue-600/70">searchTrending</span>{"({"}<br />
+                  {"  "}<span className="text-amber-700/70">category</span>: <span className="text-green-700/70">'technology'</span>,<br />
+                  {"  "}<span className="text-amber-700/70">limit</span>: <span className="text-black/35">10</span><br />
                   {"})"}
                 </div>
               </div>
@@ -379,23 +378,23 @@ export default function ViralLookupPage() {
               >
                 <div className="flex items-center gap-2 mb-2">
                   <div className="w-2 h-2 rounded-full bg-emerald-500/80 animate-pulse" />
-                  <span className="text-xs text-black/40 tracking-widest">LIVE API</span>
+                  <span className="text-xs text-black/40 tracking-widest">LIVE UPDATES</span>
                 </div>
-                <p className="text-sm text-black/45">Full REST + WebSocket API. Stream agent outputs directly into your product.</p>
+                <p className="text-sm text-black/45">Get real-time alerts for trending content and viral spikes in your niche.</p>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ── SECURITY & OBSERVABILITY ──────────────────────────────────��──── */}
+      {/* ── SECURITY & OBSERVABILITY ──────────────────────────────────── */}
       <section id="security" className="py-32 px-6 md:px-12 lg:px-20 border-t border-black/[0.06]">
         <div className="max-w-6xl mx-auto">
           <div className="mb-16">
             <PixelIcon type="platform" size={40} />
-            <div className="mt-4"><Tag>SECURITY</Tag></div>
+            <div className="mt-4"><Tag>QUALITY</Tag></div>
             <RevealText className="mt-5 text-4xl md:text-5xl font-light tracking-tight leading-[1.05]">
-              {"Enterprise-grade\nfrom day one."}
+              {"Accurate, verified\ncontent."}
             </RevealText>
           </div>
 
@@ -404,14 +403,14 @@ export default function ViralLookupPage() {
             {/* Left side — descriptions */}
             <div className="space-y-6">
               <p className="text-sm text-black/45 leading-relaxed">
-                Every action is logged, every decision is traceable. Built for teams that need compliance without compromise.
+                Every search result is verified for authenticity and accuracy. We track metrics that matter for viral success.
               </p>
 
               <div className="space-y-4">
                 {[
-                  { label: "SOC 2 Type II", desc: "Independently audited security controls" },
-                  { label: "Full Audit Trail", desc: "Every decision logged with full traceability" },
-                  { label: "Real-time Observability", desc: "Monitor, debug, and replay any execution" },
+                  { label: "Real Metrics", desc: "Verified engagement, views, and growth data" },
+                  { label: "Authentic Content", desc: "Curated from official accounts and trending sources" },
+                  { label: "Actionable Insights", desc: "Learn what makes content go viral in your niche" },
                 ].map((item) => (
                   <div key={item.label} className="flex gap-4">
                     <div className="w-1 bg-black/10 rounded-full shrink-0" />
@@ -425,7 +424,7 @@ export default function ViralLookupPage() {
 
               {/* Compliance badges — vertical stack */}
               <div className="pt-4 flex flex-col gap-2">
-                {["SOC 2", "GDPR", "HIPAA Ready", "ISO 27001"].map((badge) => (
+                {["Verified Data", "Real-time Updates", "99.9% Uptime", "Secure API"].map((badge) => (
                   <div key={badge} className="flex items-center gap-2 text-xs text-black/25">
                     <span className="w-1 h-1 rounded-full bg-black/25" />
                     {badge}
@@ -434,16 +433,16 @@ export default function ViralLookupPage() {
               </div>
             </div>
 
-            {/* Right side — live audit log visualization */}
+            {/* Right side — live data visualization */}
             <BentoCard className="p-6 lg:row-span-1" delay={0}>
-              <div className="text-xs text-black/30 tracking-widest uppercase mb-4">Live Audit Trail</div>
+              <div className="text-xs text-black/30 tracking-widest uppercase mb-4">Recent Viral Spikes</div>
               <div className="space-y-2">
                 {[
-                  { time: "12:34:21", action: "agent_executed", status: "success" },
-                  { time: "12:34:18", action: "decision_logged", status: "success" },
-                  { time: "12:34:15", action: "tool_called", status: "success" },
-                  { time: "12:34:12", action: "memory_updated", status: "success" },
-                  { time: "12:34:09", action: "output_generated", status: "success" },
+                  { time: "12:34:21", topic: "#AITrends", growth: "+245%" },
+                  { time: "12:34:18", topic: "#ContentCreators", growth: "+189%" },
+                  { time: "12:34:15", topic: "#SocialMedia", growth: "+156%" },
+                  { time: "12:34:12", topic: "#VideoMarketing", growth: "+123%" },
+                  { time: "12:34:09", topic: "#DigitalNomad", growth: "+98%" },
                 ].map((log, i) => (
                   <div
                     key={i}
@@ -453,8 +452,8 @@ export default function ViralLookupPage() {
                     }}
                   >
                     <span className="text-[10px] text-black/25 font-mono min-w-[60px]">{log.time}</span>
-                    <span className="text-[11px] text-black/50 font-light flex-1">{log.action}</span>
-                    <span className="w-1.5 h-1.5 rounded-full bg-green-500/60 group-hover:bg-green-500 transition-colors" />
+                    <span className="text-[11px] text-black/50 font-light flex-1">{log.topic}</span>
+                    <span className="text-xs text-emerald-600 group-hover:text-emerald-700 transition-colors font-medium">{log.growth}</span>
                   </div>
                 ))}
               </div>
@@ -477,7 +476,7 @@ export default function ViralLookupPage() {
         <div className="flex border-b border-black/[0.06]" style={{ animation: "marqueeLeft 28s linear infinite" }}>
           {[...Array(3)].map((_, rep) => (
             <div key={rep} className="flex shrink-0">
-              {["Web Research", "Code Generation", "Email Drafting", "Data Analysis", "PR Reviews", "Scheduling", "SQL Queries", "API Calls", "File Processing", "Monitoring"].map((cap) => (
+              {["Keyword Research", "Competitor Analysis", "Trend Discovery", "Hook Library", "Engagement Tracking", "Niche Intelligence", "Content Inspiration", "Platform Analytics", "Growth Metrics", "Viral Potential"].map((cap) => (
                 <div key={cap} className="flex items-center gap-6 px-10 py-5 border-r border-black/[0.06] shrink-0">
                   <span className="w-1.5 h-1.5 rounded-full bg-black/20 shrink-0" />
                   <span className="text-sm text-black/45 whitespace-nowrap tracking-wide">{cap}</span>
@@ -489,7 +488,7 @@ export default function ViralLookupPage() {
         <div className="flex" style={{ animation: "marqueeRight 22s linear infinite" }}>
           {[...Array(3)].map((_, rep) => (
             <div key={rep} className="flex shrink-0">
-              {["Report Writing", "Slack Summaries", "Lead Scoring", "Image Tagging", "Test Running", "Deployment", "Log Parsing", "Invoice Processing", "Meeting Notes", "Sentiment Analysis"].map((cap) => (
+              {["TikTok Trends", "Instagram Insights", "YouTube Analytics", "Twitter Virality", "Multi-Platform Search", "Content Database", "Creator Tools", "Viral Alerts", "Performance Tracking", "Niche Targeting"].map((cap) => (
                 <div key={cap} className="flex items-center gap-6 px-10 py-5 border-r border-black/[0.06] shrink-0">
                   <span className="w-1.5 h-1.5 rounded-full bg-black/12 shrink-0" />
                   <span className="text-sm text-black/30 whitespace-nowrap tracking-wide">{cap}</span>
@@ -500,22 +499,22 @@ export default function ViralLookupPage() {
         </div>
       </section>
 
-      {/* ── LIVE AGENTS ��──────────────────────────────────────────────────── */}
+      {/* ── LIVE AGENTS ─────────────────────────────────────────────��──────── */}
       <section id="live" className="py-32 px-6 md:px-12 lg:px-20 border-t border-black/[0.06]">
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
             <div>
               <PixelIcon type="agents" size={40} />
-              <div className="mt-4"><Tag>LIVE RIGHT NOW</Tag></div>
+              <div className="mt-4"><Tag>TRENDING NOW</Tag></div>
               <RevealText className="mt-5 text-4xl md:text-5xl lg:text-6xl font-light tracking-tight leading-[1.05]">
-                {"Agents working\n24 / 7, autonomously."}
+                {"What's going viral\nright now."}
               </RevealText>
               <p className="mt-6 text-base text-black/40 leading-relaxed max-w-sm">
-                At any moment, thousands of agents are running tasks on behalf of teams around the world — no human in the loop.
+                Check out the latest viral content and trending topics across all major social media platforms.
               </p>
               <div className="mt-10 flex items-end gap-2">
                 <LiveAgentCounter />
-                <span className="text-black/30 text-sm mb-1 tracking-wide">agents active globally</span>
+                <span className="text-black/30 text-sm mb-1 tracking-wide">trending topics tracked</span>
               </div>
             </div>
             <div className="relative">
@@ -525,40 +524,40 @@ export default function ViralLookupPage() {
         </div>
       </section>
 
-      {/* ── PRICING ───────────────────────────────────���────������─────────────── */}
+      {/* ── PRICING ───────────────────────────────────────────────────── */}
       <section id="pricing" className="py-32 px-6 md:px-12 lg:px-20 border-t border-black/[0.06]">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-16 flex flex-col items-center">
             <PixelIcon type="pricing" size={40} />
             <div className="mt-4"><Tag>PRICING</Tag></div>
             <RevealText className="mt-5 text-4xl md:text-5xl font-light tracking-tight leading-[1.05]">
-              {"Pay as your agents grow."}
+              {"Plans for creators of all sizes."}
             </RevealText>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-3" onMouseMove={handleMouse}>
             {[
               {
-                name: "Sandbox",
+                name: "Starter",
                 price: "Free",
-                sub: "Start experimenting",
-                features: ["5 agents", "1,000 tasks/mo", "Community support", "Basic traces"],
+                sub: "Start discovering",
+                features: ["10 searches/month", "Basic analytics", "Email support", "Limited platforms"],
                 delay: 0,
               },
               {
-                name: "Builder",
-                price: "$49",
+                name: "Creator",
+                price: "$29",
                 period: "/mo",
-                sub: "For teams shipping fast",
-                features: ["50 agents", "100K tasks/mo", "Priority support", "Full traces + replay", "Custom tools", "REST API"],
+                sub: "For content creators",
+                features: ["Unlimited searches", "Advanced analytics", "Priority support", "All platforms", "Custom alerts", "API access"],
                 highlight: true,
                 delay: 80,
               },
               {
-                name: "Enterprise",
+                name: "Agency",
                 price: "Custom",
-                sub: "For orgs at scale",
-                features: ["Unlimited agents", "Unlimited tasks", "Dedicated infra", "SOC 2 / HIPAA", "SLA guarantees", "Custom contracts"],
+                sub: "For teams and agencies",
+                features: ["Custom searches", "Team collaboration", "Dedicated support", "White-label options", "Advanced integrations", "Custom contracts"],
                 delay: 140,
               },
             ].map((plan) => (
@@ -588,7 +587,7 @@ export default function ViralLookupPage() {
                     ? "bg-[#111] text-white hover:bg-[#333]"
                     : "border border-black/10 text-black/60 hover:border-black/25 hover:text-black hover:bg-black/[0.04]"
                 }`}>
-                  {plan.name === "Enterprise" ? "CONTACT SALES" : "GET STARTED"}
+                  {plan.name === "Agency" ? "CONTACT SALES" : "GET STARTED"}
                 </button>
               </BentoCard>
             ))}
@@ -596,7 +595,7 @@ export default function ViralLookupPage() {
         </div>
       </section>
 
-      {/* ── CTA ───────────────────────────────────────────────────────────── */}
+      {/* ── CTA ────────────────────────────────────────────────────────── */}
       <section className="relative py-32 px-6 md:px-12 lg:px-20 border-t border-black/[0.06] overflow-hidden">
         {/* Glass panels image — anchored to bottom center */}
         <img
@@ -625,10 +624,10 @@ export default function ViralLookupPage() {
         />
         <div className="relative z-10 max-w-2xl mx-auto text-center">
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-light tracking-tight leading-[1.05] mb-6">
-            Start building your<br />agent workforce.
+            Start finding viral<br />content today.
           </h2>
           <p className="text-sm text-black/45 leading-relaxed mb-10">
-            Join thousands of teams deploying AI agents that work around the clock, across every timezone.
+            Join thousands of creators, marketers, and agencies discovering trending content and viral ideas.
           </p>
           {!submitted ? (
             <form
@@ -660,7 +659,7 @@ export default function ViralLookupPage() {
       </section>
 
 
-      {/* ── FOOTER ────────────────────────────────────────────────────────── */}
+      {/* ── FOOTER ───────────────────────────────────────────���────────────── */}
       <footer className="py-10 px-6 md:px-12 lg:px-20 border-t border-black/[0.06]">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
           <span className="font-pixel text-xs tracking-[0.25em] text-black/50">ViralLookup</span>
@@ -668,11 +667,11 @@ export default function ViralLookupPage() {
           {/* Nav sections */}
           <div className="flex flex-wrap items-center gap-x-8 gap-y-3">
             {[
-              { label: "Platform",     href: "#platform" },
-              { label: "Agents",       href: "#agents" },
+              { label: "Features",     href: "#platform" },
+              { label: "Search Types", href: "#agents" },
               { label: "Workflow",     href: "#workflow" },
-              { label: "Integrations", href: "#integrations" },
-              { label: "Live",         href: "#live" },
+              { label: "Platforms",    href: "#integrations" },
+              { label: "Trending",     href: "#live" },
               { label: "Pricing",      href: "#pricing" },
             ].map(l => (
               <a key={l.label} href={l.href} className="text-xs text-black/35 hover:text-black/70 transition-colors tracking-widest">{l.label}</a>
