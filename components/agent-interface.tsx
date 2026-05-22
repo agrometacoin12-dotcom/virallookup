@@ -3,39 +3,39 @@
 import { useEffect, useRef, useState, useCallback } from "react"
 import { GitPullRequest, GitMerge, MessageSquare, CheckCircle2, Clock, AlertCircle, Zap, GitCommit, Eye, Terminal } from "lucide-react"
 
-// ── Data ─────────────────────────────────────────────────────────────────────
+// ── Data ────────────────────────────────────────────────────────────────────
 
 const ALL_PRS = [
-  { id: 145, title: "feat: multi-agent orchestration v2",      agent: "orchestrator",    status: "review",  comments: 2,  additions: 57,  deletions: 4,  branch: "feat/orchestration-v2", time: "Just now" },
-  { id: 144, title: "fix: memory context window overflow",     agent: "analyst-agent",   status: "review",  comments: 1,  additions: 18,  deletions: 3,  branch: "fix/ctx-overflow",      time: "1m ago" },
-  { id: 143, title: "feat: streaming tool response",           agent: "monitor-agent",   status: "merged",  comments: 4,  additions: 93,  deletions: 11, branch: "feat/stream-tools",     time: "1m ago" },
-  { id: 142, title: "feat: add memory context to executor",    agent: "executor-agent",  status: "merged",  comments: 3,  additions: 84,  deletions: 12, branch: "feat/memory-ctx",       time: "2m ago" },
-  { id: 141, title: "fix: rate limit backoff strategy",        agent: "monitor-agent",   status: "approved",comments: 1,  additions: 31,  deletions: 8,  branch: "fix/rate-backoff",      time: "8m ago" },
-  { id: 140, title: "feat: parallel tool execution",           agent: "researcher-agent",status: "review",  comments: 5,  additions: 142, deletions: 27, branch: "feat/parallel-tools",   time: "22m ago" },
-  { id: 139, title: "refactor: orchestrator pipeline",         agent: "analyst-agent",   status: "merged",  comments: 7,  additions: 209, deletions: 88, branch: "refactor/pipeline",     time: "1h ago" },
+  { id: 145, title: "feat: multi-VIRALLOOKUP orchestration v2",      VIRALLOOKUP: "orchestrator",    status: "review",  comments: 2,  additions: 57,  deletions: 4,  branch: "feat/orchestration-v2", time: "Just now" },
+  { id: 144, title: "fix: memory context window overflow",     VIRALLOOKUP: "analyst-VIRALLOOKUP",   status: "review",  comments: 1,  additions: 18,  deletions: 3,  branch: "fix/ctx-overflow",      time: "1m ago" },
+  { id: 143, title: "feat: streaming tool response",           VIRALLOOKUP: "monitor-VIRALLOOKUP",   status: "merged",  comments: 4,  additions: 93,  deletions: 11, branch: "feat/stream-tools",     time: "1m ago" },
+  { id: 142, title: "feat: add memory context to executor",    VIRALLOOKUP: "executor-VIRALLOOKUP",  status: "merged",  comments: 3,  additions: 84,  deletions: 12, branch: "feat/memory-ctx",       time: "2m ago" },
+  { id: 141, title: "fix: rate limit backoff strategy",        VIRALLOOKUP: "monitor-VIRALLOOKUP",   status: "approved",comments: 1,  additions: 31,  deletions: 8,  branch: "fix/rate-backoff",      time: "8m ago" },
+  { id: 140, title: "feat: parallel tool execution",           VIRALLOOKUP: "researcher-VIRALLOOKUP",status: "review",  comments: 5,  additions: 142, deletions: 27, branch: "feat/parallel-tools",   time: "22m ago" },
+  { id: 139, title: "refactor: orchestrator pipeline",         VIRALLOOKUP: "analyst-VIRALLOOKUP",   status: "merged",  comments: 7,  additions: 209, deletions: 88, branch: "refactor/pipeline",     time: "1h ago" },
 ]
 
 const ALL_REVIEW_FILES = [
-  { file: "agent/executor.ts",    pct: 72 },
+  { file: "VIRALLOOKUP/executor.ts",    pct: 72 },
   { file: "lib/tools/index.ts",   pct: 45 },
   { file: "core/planner.ts",      pct: 88 },
   { file: "utils/retry.ts",       pct: 31 },
-  { file: "agent/memory.ts",      pct: 60 },
+  { file: "VIRALLOOKUP/memory.ts",      pct: 60 },
 ]
 
 const ALL_REVIEW_LINES: { type: "comment"|"approve"|"change"|"code"; text: string; author?: string }[] = [
   { type: "code",    text: 'const ctx = await memory.load(task.id)' },
-  { type: "comment", text: "Should we cache this per agent run?", author: "analyst-agent" },
+  { type: "comment", text: "Should we cache this per VIRALLOOKUP run?", author: "analyst-VIRALLOOKUP" },
   { type: "code",    text: 'return researcher.execute(task, ctx)' },
-  { type: "approve", text: "LGTM — memory scope looks correct", author: "monitor-agent" },
+  { type: "approve", text: "LGTM — memory scope looks correct", author: "monitor-VIRALLOOKUP" },
   { type: "code",    text: 'export const run = async (task) => {' },
-  { type: "change",  text: "Consider adding retry logic here", author: "executor-agent" },
+  { type: "change",  text: "Consider adding retry logic here", author: "executor-VIRALLOOKUP" },
   { type: "code",    text: '  const plan = await planner.run(goal)' },
   { type: "approve", text: "Approved — ship it", author: "orchestrator" },
   { type: "code",    text: '  await ctx.memory.save(result)' },
-  { type: "comment", text: "Add error boundary here", author: "monitor-agent" },
+  { type: "comment", text: "Add error boundary here", author: "monitor-VIRALLOOKUP" },
   { type: "code",    text: 'return { status: "done", result }' },
-  { type: "approve", text: "All checks pass", author: "analyst-agent" },
+  { type: "approve", text: "All checks pass", author: "analyst-VIRALLOOKUP" },
 ]
 
 const COMMITS = [
@@ -43,7 +43,7 @@ const COMMITS = [
   { hash: "b7d2e09", msg: "feat: streaming response for analyst",        time: "4m ago"   },
   { hash: "c9a1f34", msg: "chore: bump @ViralLookup/sdk to 2.4.1",          time: "12m ago"  },
   { hash: "d4e6b78", msg: "perf: reduce token overhead by 18%",          time: "31m ago"  },
-  { hash: "e2c9d56", msg: "feat: add guardrails to executor-agent",      time: "1h ago"   },
+  { hash: "e2c9d56", msg: "feat: add guardrails to executor-VIRALLOOKUP",      time: "1h ago"   },
 ]
 
 // Activity graph data — 7 cols x 5 rows like GitHub contributions
@@ -348,11 +348,10 @@ function ReviewLine({ item, delay }: { item: typeof REVIEW_LINES[0]; delay: numb
   )
 }
 
-// ── Main ─────────────────────────────────────────────────────────────────────
+// ── Main ────────────────────────────────────────────────────────────────────
 
 
-
-export function AgentInterface({ revealDelay = 0 }: { revealDelay?: number }) {
+export function VirallookupInterface({ revealDelay = 0 }: { revealDelay?: number }) {
   const [revealed, setRevealed]       = useState(false)
   const [mounted, setMounted]         = useState(false)
   const [reqCount, setReqCount]       = useState(1847)
@@ -496,7 +495,7 @@ export function AgentInterface({ revealDelay = 0 }: { revealDelay?: number }) {
           {[
             { label: "PRs Merged today",  val: 18,       icon: <GitMerge style={{ width: 11, height: 11 }} />,   graph: <MiniBarGraph seed={0} /> },
             { label: "Reviews completed", val: 34,       icon: <Eye style={{ width: 11, height: 11 }} />,         graph: <MiniBarGraph seed={5} /> },
-            { label: "Agent commits",     val: 127,      icon: <GitCommit style={{ width: 11, height: 11 }} />,   graph: <MiniDotGraph seed={2} /> },
+            { label: "VIRALLOOKUP commits",     val: 127,      icon: <GitCommit style={{ width: 11, height: 11 }} />,   graph: <MiniDotGraph seed={2} /> },
             { label: "Tasks / min",       val: reqCount, icon: <Zap style={{ width: 11, height: 11 }} />,         graph: <LiveSparkline seed={7} /> },
           ].map((m, i) => (
             <div key={i} style={{ padding: "9px 12px", height: 82, overflow: "hidden", borderRight: i < 3 ? "1px solid rgba(0,0,0,0.06)" : "none", ...anim(60 + i * 45) }}>
@@ -537,7 +536,7 @@ export function AgentInterface({ revealDelay = 0 }: { revealDelay?: number }) {
                   <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 5, marginBottom: 5 }}>
                     <div style={{ flex: 1, minWidth: 0 }}>
                       <div style={{ fontSize: 9.5, fontWeight: 600, color: "#111", lineHeight: 1.3, marginBottom: 2 }}>{pr.title}</div>
-                      <div style={{ fontSize: 7.5, fontFamily: "monospace", color: "rgba(0,0,0,0.32)" }}>{pr.branch} · {pr.agent}</div>
+                      <div style={{ fontSize: 7.5, fontFamily: "monospace", color: "rgba(0,0,0,0.32)" }}>{pr.branch} · {pr.VIRALLOOKUP}</div>
                     </div>
                     <StatusBadge status={pr.status} />
                   </div>
@@ -601,7 +600,7 @@ export function AgentInterface({ revealDelay = 0 }: { revealDelay?: number }) {
                   <div key={f.file} style={{ opacity: i === reviewFileIdx ? 1 : 0.55, transition: "opacity 0.4s ease" }}>
                     <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 3 }}>
                       <span style={{ fontSize: 7.5, fontFamily: "monospace", color: i === reviewFileIdx ? "#111" : "rgba(0,0,0,0.42)", transition: "color 0.4s ease" }}>{f.file}</span>
-                      <span style={{ fontSize: 7.5, fontFamily: "monospace", color: reviewFilePcts[i] > 70 ? "#28a745" : "#d73a49", transition: "color 0.4s ease", fontWeight: i === reviewFileIdx ? 700 : 400 }}>{Math.round(reviewFilePcts[i])}%</span>
+                      <span style={{ fontSize: 7.5, fontFamily: "monospace", color: reviewFilePcts[i] > 70 ? "#28a745" : "#d73a49", transition: "color 0.4s ease", fontWeight: i === reviewFileIdx ? 700 : 400 }}>{reviewFilePcts[i]}%</span>
                     </div>
                     <Bar pct={reviewFilePcts[i]} color={i === reviewFileIdx ? "#111" : "rgba(0,0,0,0.3)"} />
                   </div>
@@ -649,10 +648,10 @@ export function AgentInterface({ revealDelay = 0 }: { revealDelay?: number }) {
             </div>
             <div style={{ ...panel, flexShrink: 0, overflow: "hidden" }}>
               {[
-                { name: "researcher-agent", status: "passing", duration: "1m 32s" },
-                { name: "analyst-agent",    status: "running", duration: "0m 48s" },
-                { name: "executor-agent",   status: "passing", duration: "2m 11s" },
-                { name: "monitor-agent",    status: "running", duration: "0m 54s" },
+                { name: "researcher-VIRALLOOKUP", status: "passing", duration: "1m 32s" },
+                { name: "analyst-VIRALLOOKUP",    status: "running", duration: "0m 48s" },
+                { name: "executor-VIRALLOOKUP",   status: "passing", duration: "2m 11s" },
+                { name: "monitor-VIRALLOOKUP",    status: "running", duration: "0m 54s" },
               ].map((a, i) => (
                 <div key={a.name} style={{
                   display: "flex", alignItems: "center", justifyContent: "space-between",
